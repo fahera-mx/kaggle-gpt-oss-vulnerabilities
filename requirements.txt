@@ -1,0 +1,7 @@
+# Local package
+-e .
+
+# Python Libraries
+
+# Additional requirements
+flake8
