@@ -2,6 +2,9 @@
 -e .
 
 # Python Libraries
+openai==1.101.0
+python-dotenv==1.1.1
 
 # Additional requirements
-flake8
+flake8==7.3.0
+jupyter==1.1.1
