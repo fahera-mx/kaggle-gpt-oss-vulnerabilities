@@ -68,4 +68,5 @@ class CLI:
                 experiment = ExperimentContrast()
                 experiment.run(output_dirpath=output_dirpath, n=num)
             case _:
+                print(f"Unknown experiment type name '{name}' provided; Only 'grid' and 'contrast' are supported.")
                 raise ValueError(f"Unknown experiment name: {name}")
