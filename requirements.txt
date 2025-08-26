@@ -1,6 +1,3 @@
-# Local package
--e .
-
 # Python Libraries
 openai==1.101.0
 python-dotenv==1.1.1
@@ -8,6 +5,9 @@ numpy==2.3.2
 pandas==2.3.2
 scikit-learn==1.7.1
 lime==1.7.1
+
+# CLI Tools
+fire==0.7.1
 
 # Additional requirements
 flake8==7.3.0
