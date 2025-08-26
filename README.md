@@ -79,7 +79,8 @@ Running an experiment generated the following output in the working directory:
 * Subdirectory with the `run_id`, each independent execution creates a different run_id and a directory in this location: `experiment-{{name}}-output/{{run_id}}`
 * All the output files are located within the corresponding run-id subdirectory.
 
-For illustrative purposes, a couple of small executions were added on the `data/` directory.
+For illustrative purposes, a couple of small executions were added on the `data/` directory. For a larger version of the output results, feel free to take at the compressed content in `data/experiment-grid-output-large.zip` or at this kaggle dataset:
+* https://www.kaggle.com/datasets/rhdzmota/gpt-oss-vulnerabilities-grid-sampling-experiment 
 
 
 ## Contest information
