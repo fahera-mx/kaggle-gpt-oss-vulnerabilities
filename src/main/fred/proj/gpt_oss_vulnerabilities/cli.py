@@ -39,8 +39,8 @@ class CLI:
     def hello(self, name: Optional[str] = None) -> str:
         return f"Hello, {name or 'World'}!"
     
+    @staticmethod
     def run_experiment(
-            self,
             size: int,
             experiment_params_filepath: str,
             output_dirpath: Optional[str] = None,
