@@ -42,6 +42,7 @@ setup(
             "fred.gpt_oss_vulnerabilities=fred.proj.gpt_oss_vulnerabilities.cli:CLI.cli_exec",
         ]
     },
+    install_requires=requirements,
     include_package_data=True,
     python_requires=">=3.11.0"
 )
