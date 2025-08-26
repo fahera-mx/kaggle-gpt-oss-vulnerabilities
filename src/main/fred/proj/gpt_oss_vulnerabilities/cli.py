@@ -13,6 +13,8 @@ class CLI:
     def __post_init__(self):
         from dotenv import load_dotenv
 
+        # TODO: we should allow user to disable this...
+        # probably with an intential env.var such as "FRD_SKIP_DOTENV"
         load_dotenv()
 
     @classmethod
