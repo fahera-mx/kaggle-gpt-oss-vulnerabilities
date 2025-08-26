@@ -45,11 +45,11 @@ class CLI:
             experiment_params_filepath: str,
             output_dirpath: Optional[str] = None,
     ):
-        from fred.proj.gpt_oss_vulnerabilities.experiment import Experiment
+        from fred.proj.gpt_oss_vulnerabilities.experiment import ExperimentGrid
 
         output_dirpath = output_dirpath or os.path.join(
             os.path.dirname(experiment_params_filepath),
             "experiment-output"
         )
-        experiment = Experiment.from_csv(experiment_params_filepath)
+        experiment = ExperimentGrid.from_csv(experiment_params_filepath)
         experiment.run(output_dirname=output_dirpath, sample_size=size)

@@ -19,7 +19,7 @@ from fred.proj.gpt_oss_vulnerabilities.settings import (
 
 
 @dataclass(frozen=True, slots=True)
-class Experiment:
+class ExperimentGrid:
     params: Params
 
     @classmethod
@@ -86,7 +86,7 @@ class Experiment:
 
 
 @dataclass(frozen=True, slots=True)
-class ExperimentResults:
+class ExperimentGridResults:
     results: list[dict]
 
     @classmethod
