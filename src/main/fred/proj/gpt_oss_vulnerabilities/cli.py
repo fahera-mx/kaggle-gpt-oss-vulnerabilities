@@ -41,15 +41,32 @@ class CLI:
     
     @staticmethod
     def run_experiment(
-            size: int,
-            experiment_params_filepath: str,
-            output_dirpath: Optional[str] = None,
+            name: str,
+            num: int,
+            work_dirpath: str,
+            **kwargs,
     ):
-        from fred.proj.gpt_oss_vulnerabilities.experiment import Experiment
-
-        output_dirpath = output_dirpath or os.path.join(
-            os.path.dirname(experiment_params_filepath),
-            "experiment-output"
+        from fred.proj.gpt_oss_vulnerabilities.experiment import (
+            ExperimentGrid,
+            ExperimentContrast,
         )
-        experiment = Experiment.from_csv(experiment_params_filepath)
-        experiment.run(output_dirname=output_dirpath, sample_size=size)
+
+        output_dirpath = os.path.join(
+            work_dirpath,
+            f"experiment-{name}-output".lower()
+        )
+        match name.lower():
+            case "grid":
+                experiment = ExperimentGrid.from_csv(
+                    filepath=os.path.join(
+                        work_dirpath,
+                        kwargs.get("params_filename", "experiment-params.csv")
+                    )
+                )
+                experiment.run(output_dirpath=output_dirpath, sample_size=num)
+            case "contrast":
+                experiment = ExperimentContrast()
+                experiment.run(output_dirpath=output_dirpath, n=num)
+            case _:
+                print(f"Unknown experiment type name '{name}' provided; Only 'grid' and 'contrast' are supported.")
+                raise ValueError(f"Unknown experiment name: {name}")
