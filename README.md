@@ -1,4 +1,86 @@
-# kaggle-gpt-oss-vulnerabilities
+# FRED Kaggle Challenges: GPT OSS Vulnerabilities
+
+## Installation
+
+Recommended python version: `3.12.3`
+
+You can install the package in your local environment by simply running:
+```
+$ pip install -e .
+```
+* This will install our implementation with all the required dependencies.
+
+### Additional considerations
+
+Before running any experiments, set the following environment variables:
+* `FRD_OPENAI_API_KEY`
+* `FRD_OPENAI_BASE_URL`
+
+If running the GPT-OSS model in your local environment is not possible, you can get access to a free GPT-OSS 20B model via `nvidia niv` in the following url:
+* https://build.nvidia.com/openai/gpt-oss-20b 
+
+Alternatively, OpenRouter also offers a free implementation here:
+* https://openrouter.ai/openai/gpt-oss-20b:free 
+
+We are not associated with any of these companies, and highly recommend the user to do their own reseach regarding model hosting providers.
+
+## Experiments
+
+Ensure that you have correctly installed the package by running this command:
+
+```
+$ fred.gpt_oss_vulnerabilities version
+```
+* The output should be the latest version.
+
+You can run the experiments by executing this command on the root of the repository:
+
+```
+$ fred.gpt_oss_vulnerabilities run_experiment \
+    --name grid \
+    --num 20 \
+    --work_dirpath data
+```
+* `--name` refers to the experiment type name with the following values: `grid`, `contrast`
+* `--num` refers to a numeric parameter that will be passed through the different experimet types:
+    * For `grid` this number refers to the number of random samples taken from the parameter grid.
+    * For `contrast` this number refers to the number of users generated.
+* `--work_dirpath` refers to the experiment's working directory path; by defaul we are using the `data` directory located on the root of the repo. Consider that some experiments refer to files located in the `work_dirpath` (e.g., the `grid` experiment will look for the `experiment-params.csv` file in that location.)
+
+Alternatively, you can also import the components to run an experiment into a notebook or interactive python enviroment. The fastest way is to leverage the `CLI` class which is the one being called on the terminal; alternatively, you can also make use of the lower-level experiment classes located on the `experiment` module.
+
+```python
+# Example using the CLI class for simplicity
+from fred.proj.gpt_oss_vulnerabilities.cli import CLI
+
+# Call the 'run_experiment' method that has exactly the same arguments as the one
+# available in the commandline. Consider that you may need to adjust this value for 'work_dirpath'
+# depending on the location of the notebook relative to the location of the data directory.
+CLI.run_experiment(
+  name="grid",
+  num=20,
+  work_dirpath="data",  # May need to adjust this path.
+)
+```
+
+```python
+# You can leverage lower-level classes such as the ones available in the 'experiment' module
+from fred.proj.gpt_oss_vulnerabilities.experiment import (
+    ExperimentGrid,
+    ExperimentContrast,
+)
+
+experiment = ExperimentGrid.from_csv("data/experiment-params.csv")
+experiment.run(output_dirpath="data/experiment-grid-output", sample_size=10)
+```
+
+Running an experiment generated the following output in the working directory:
+* Output directory with the name-pattern: `experiment-{{name}}-output`
+* Subdirectory with the `run_id`, each independent execution creates a different run_id and a directory in this location: `experiment-{{name}}-output/{{run_id}}`
+* All the output files are located within the corresponding run-id subdirectory.
+
+For illustrative purposes, a couple of small executions were added on the `data/` directory.
+
 
 ## Contest information
 [Kaggle contest](https://www.kaggle.com/competitions/openai-gpt-oss-20b-red-teaming)
