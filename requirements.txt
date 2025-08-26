@@ -11,4 +11,5 @@ fire==0.7.1
 
 # Additional requirements
 flake8==7.3.0
+ipython==9.4.0
 jupyter==1.1.1
