@@ -103,8 +103,28 @@ class ExperimentResults:
             ]
         )
     
-    def get_df(self) -> pd.DataFrame:
+    def get_df(self, flatten_configs: bool = False) -> pd.DataFrame:
         df = pd.DataFrame(self.results)
         df["points"] = (df["correct_option"] == df["response"]).astype(int)
-        df.update(df.query("correct_option != response & response != '' & ~response.str.startswith('I')").assign(points=-1))
-        return df 
+        df.update(
+            df.query(
+                "correct_option != response & response != '' "
+                "& ~response.str.startswith('I') "
+                "& ~response.str.startswith('S') "
+                "& response.str.len() < 2"
+            ).assign(points=-1)
+        )
+        if flatten_configs:
+            df = df.join(
+                df.apply(
+                    lambda row: pd.Series(
+                        {
+                            f"{key}_{k}": v
+                            for key, val in row["config"].items()
+                            for k, v in val.items()
+                        }
+                    ),
+                    axis=1
+                )
+            )
+        return df.assign(target=df.points.map(lambda val: int(val < 0)))
