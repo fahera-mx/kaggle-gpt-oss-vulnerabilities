@@ -47,7 +47,7 @@ $ fred.gpt_oss_vulnerabilities run_experiment \
     * For `contrast` this number refers to the number of users generated.
 * `--work_dirpath` refers to the experiment's working directory path; by defaul we are using the `data` directory located on the root of the repo. Consider that some experiments refer to files located in the `work_dirpath` (e.g., the `grid` experiment will look for the `experiment-params.csv` file in that location.)
 
-Alternatively, you can also import the components to run an experiment into a notebook or interactive python enviroment. The fastest way is to leverage the `CLI` class which is the one being called on the terminal; alternatively, you can also make use of the lower-level experiment classes located on the `experiment` module.
+Alternatively, if your environment does not allow you to execute the commandline options, you can also import the components to run an experiment into a notebook, script or interactive python enviroment. Our implementation is fully replicable and re-usable. The fastest way is to leverage the `CLI` class which is the one being called on the terminal, or you could also make use of the lower-level experiment classes located on the `experiment` module.
 
 ```python
 # Example using the CLI class for simplicity
